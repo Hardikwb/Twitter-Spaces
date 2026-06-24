@@ -1,7 +1,18 @@
-import { getTRPCErrorFromUnknown } from "@trpc/server";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
-const userSchema = new Schema(
+export interface Iuser{
+    _id:Types.ObjectId,
+    username:string,
+    email:string,
+    activated:boolean,
+    refreshToken?:string,
+    avatar?:string,
+    publicId?:string,
+    createdAt?:string,
+    updatedAt?:string,
+}
+
+const userSchema = new Schema<Iuser>(
   {
     username: {
       type: String,
@@ -27,5 +38,5 @@ const userSchema = new Schema(
   { timestamps: true },
 );
 
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("User", userSchema);
 export default userModel;
