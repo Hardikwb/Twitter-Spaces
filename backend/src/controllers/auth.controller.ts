@@ -74,19 +74,15 @@ class AuthController {
         newUser.refreshToken = refreshToken;
         newUser.save();
 
-        const options = {
-          httpOnly: true,
-          secure: true,
-        };
         res.cookie("refreshToken", refreshToken, {
           maxAge: 1000 * 60 * 60 * 24 * 30,
           httpOnly: true,
-          secure: true,
+          secure: config.NODE_ENV === "production",
         });
         res.cookie("accessToken", accessToken, {
           maxAge: 1000 * 60 * 30,
           httpOnly: true,
-          secure: true,
+          secure: config.NODE_ENV === "production",
         });
 
         const userDto = new UserDTO(newUser);
@@ -238,18 +234,18 @@ class AuthController {
     res.cookie("refreshToken", refreshToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
-      secure:true,
+      secure: config.NODE_ENV === "production",
     });
 
     res.cookie("accessToken", accessToken, {
       maxAge: 1000 * 60 * 30,
       httpOnly: true,
-      secure:true,
+      secure: config.NODE_ENV === "production",
     });
 
     // response
     const userDto = new UserDTO(user);
-    res.json({ user: userDto, auth: true });
+    return res.json({ user: userDto, auth: true });
   }
 
   async logout(req:Request,res:Response){

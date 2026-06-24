@@ -6,8 +6,6 @@ class CodeService {
     return crypto.randomInt(1000, 9999);
   }
 
-  sendCode() {}
-
   verifyCode(code: string, hashedCode: string) {
     return hashServices.hashData(code) === hashedCode;
   }

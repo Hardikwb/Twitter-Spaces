@@ -8,10 +8,10 @@ import userModel from "../models/user.models.js";
 class TokenService {
   generateTokens(payload: object) {
     const accessToken = jwt.sign(payload, config.ACCESS_TOKEN_SECRET!, {
-      expiresIn: "1m",
+      expiresIn: "15m",
     });
     const refreshToken = jwt.sign(payload, config.REFRESH_TOKEN_SECRET!, {
-      expiresIn: "2m",
+      expiresIn: "30d",
     });
     return { accessToken, refreshToken };
   }
