@@ -4,6 +4,7 @@ import config from "./config/config.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./route/auth.route.js";
 import connectDB from "./services/db.js";
+import roomRouter from "./route/room.route.js";
 const app = express();
 const PORT = config.PORT;
 const DOMAIN = config.DOMAIN;
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api", roomRouter);
 
 app.listen(PORT, () => {
   console.log(`App listening on ${DOMAIN}:${PORT}`);
