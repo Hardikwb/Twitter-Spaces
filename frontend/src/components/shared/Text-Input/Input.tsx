@@ -1,14 +1,21 @@
-import styles from "./Input.module.css"
-import type { InputHTMLAttributes } from "react"
+import styles from "./Input.module.css";
+import type { InputHTMLAttributes } from "react";
 
-const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
-    return (
-        <input 
-            className={styles.input}
-            type="text"
-            {...props}
-        />
-    )
-}
+type PropsType = InputHTMLAttributes<HTMLInputElement> & {
+  fullwidth?: boolean;
+};
 
-export default Input
+const Input = ({ fullwidth, ...props }: PropsType) => {
+  return (
+    <input
+      className={styles.input}
+      style={{
+        width: fullwidth ? "100%" : undefined,
+      }}
+      type="text"
+      {...props} // Safe to spread now
+    />
+  );
+};
+
+export default Input;
