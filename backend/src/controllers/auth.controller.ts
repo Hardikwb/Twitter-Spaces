@@ -225,12 +225,6 @@ class AuthController {
     // Update refresh token
     user.refreshToken = refreshToken;
     await user.save();
-    // try {
-    //     await tokenService.updateRefreshToken(userData._id, refreshToken);
-    // } catch (err) {
-    //     return res.status(500).json({ message: 'Internal error' });
-    // }
-    // put in cookie
     res.cookie("refreshToken", refreshToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
@@ -248,12 +242,11 @@ class AuthController {
     return res.json({ user: userDto, auth: true });
   }
 
-  async logout(req:Request,res:Response){
-    res.clearCookie('refreshToken');
-    res.clearCookie('accessToken');
-    return res.json(new ApiResponse(200,"User logout successfully"))
+  async logout(req: Request, res: Response) {
+    res.clearCookie("refreshToken");
+    res.clearCookie("accessToken");
+    return res.json(new ApiResponse(200, "User logout successfully"));
   }
-
 }
 
 const authController = new AuthController();
