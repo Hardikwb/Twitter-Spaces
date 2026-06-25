@@ -1,13 +1,11 @@
-import express from "express"
-import roomController from "../controllers/room.controller.js"
-import authMiddleWare from "../middleware/auth.middleware.js"
+import express from "express";
+import roomController from "../controllers/room.controller.js";
+import authMiddleWare from "../middleware/auth.middleware.js";
 
-const roomRouter = express.Router()
+const roomRouter = express.Router();
 
+roomRouter.post("/rooms", authMiddleWare, roomController.createRoom);
+roomRouter.get("/rooms", authMiddleWare, roomController.roomsIndex);
+roomRouter.get("/rooms/:roomId", authMiddleWare, roomController.showRoom);
 
-roomRouter.post('/room',authMiddleWare,roomController.createRoom)
-roomRouter.get('/room',authMiddleWare,roomController.roomsIndex)
-roomRouter.get('/room/:id',authMiddleWare,roomController.showRoom)
-
-
-export default roomRouter
+export default roomRouter;

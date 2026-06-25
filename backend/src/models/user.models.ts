@@ -1,15 +1,15 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-export interface Iuser{
-    _id:Types.ObjectId,
-    username:string,
-    email:string,
-    activated:boolean,
-    refreshToken?:string,
-    avatar?:string,
-    publicId?:string,
-    createdAt?:string,
-    updatedAt?:string,
+export interface Iuser {
+  _id: Types.ObjectId;
+  username: string;
+  email: string;
+  activated: boolean;
+  refreshToken?: string;
+  avatar?: string;
+  publicId?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const userSchema = new Schema<Iuser>(
