@@ -21,14 +21,12 @@ export const activateProfile = (formData: object) =>
 
 export const refresh = () => api.get("/api/auth/refresh");
 export const logout = () => api.get("/api/auth/logout");
-export const createROOM = (data:object) => api.post("/api/room",data);
-export const getAllRoom = () => api.get("/api/room");
-export const getRoom = (roomid:string) => api.get(`/api/room/${roomid}`);
-
+export const createROOM = (data: object) => api.post("/api/rooms", data);
+export const getAllRoom = () => api.get("/api/rooms");
+export const getRoom = (roomid: string) => api.get(`/api/rooms/${roomid}`);
 
 api.interceptors.response.use(
   (config) => {
-    // console.log("Config::", config);
     return config;
   },
   async (error) => {
@@ -40,11 +38,9 @@ api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/auth/refresh`,
-          { withCredentials: true },
-        );
-        console.log("Reponse::AXIOS::", response);
+        await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {
+          withCredentials: true,
+        });
         return api.request(originalRequest);
       } catch (error) {
         if (error instanceof Error) console.log(error.message);
